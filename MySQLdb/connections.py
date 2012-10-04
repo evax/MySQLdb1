@@ -292,6 +292,7 @@ class Connection(_mysql.connection):
         if self.character_set_name() != charset:
             try:
                 super(Connection, self).set_character_set(charset)
+                self.query('SET NAMES utf8mb4')
             except AttributeError:
                 if self._server_version < (4, 1):
                     raise NotSupportedError("server is too old to set charset")
